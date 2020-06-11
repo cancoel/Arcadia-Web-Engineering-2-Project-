@@ -13,13 +13,13 @@ router.get("/", function (req, res) {
     });
 });
 
-router.get("/user", function (req, res) {
+router.get("/:id", function (request, response) {
   // console.log(req.body)
   User.find({
-    username: req.body.username,
+    _id: request.params.id
   })
     .then((user) => {
-      res.status(200).json(user);
+      response.status(200).json(user);
     })
     .catch((error) => {
       console.error(error);
@@ -104,19 +104,18 @@ router.post("/login", (request, response) => {
     });
 });
 
-router.delete("/remove", (request, response) => {
-  User.find()
-    .or([{ email: request.body.email }, { username: request.body.username }])
+router.delete("/remove/:id", (request, response) => {
+  User.find({
+    _id: request.params.id
+  })
     .then((users) => {
       if (users.length) {
         // suche erfolgreich
         users.forEach((user) => {
           if (user.password === request.body.password) {
-            User.deleteOne()
-              .or([
-                { username: request.body.username },
-                { email: request.body.email },
-              ])
+            User.deleteOne({
+              _id: request.params.id
+            })
               .then((user) => {
                 response.status(200).json(user);
               })
@@ -144,7 +143,7 @@ router.delete("/remove", (request, response) => {
     });
 });
 
-router.patch("/edit", (request, response) => {
+router.patch("/edit/:id", (request, response) => {
   // NOT NEEDED IF UPDATE === request.body
   // only update the passed request properties
   // add prop to update if !== undefined
@@ -155,23 +154,47 @@ router.patch("/edit", (request, response) => {
   //     update[key] = request.body[key];
   //   }
   // }
-  User.findOneAndUpdate(
-    {
-      username: request.body.username
-    },
-    request.body,
-    {
-      upsert: false,
-      new: true,
-    }
-  ).then((user) => {
-    if (!user) {
-      response.status(400).json({
-        error: 'Username not found'
-      });
-    }
-    response.status(200).json(user);
-  });
+
+// Suchen und ändern über Username. Wird nicht mehr benutzt, wird nun über die id
+// realisiert 
+
+//   User.findOneAndUpdate(
+//     {
+//       username: request.body.username
+//     },
+//     request.body,
+//     {
+//       upsert: false,
+//       new: true,
+//     }
+//   ).then((user) => {
+//     if (!user) {
+//       response.status(400).json({
+//         error: 'Username not found'
+//       });
+//     }
+//     response.status(200).json(user);
+//   });
+// });
+
+
+User.findByIdAndUpdate(
+  {
+    _id: request.params.id
+  },
+  request.body,
+  {
+    upsert: false,
+    new: true,
+  }
+).then((user) => {
+  if (!user) {
+    response.status(400).json({
+      error: 'Username not found'
+    });
+  }
+  response.status(200).json(user);
+});
 });
 
 module.exports = router;
