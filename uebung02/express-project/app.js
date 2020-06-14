@@ -1,3 +1,5 @@
+'use strict';
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,16 +7,43 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var connection = require("./dbcon.js");
 var users = require("./models/users.js");
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var messagesRouter = require("./routes/messages.js");
 const { config } = require('process');
+const { request } = require('http');
 
 var app = express();
+
+
+// // create application/json parser
+// var jsonParser = bodyParser.json();
+
+// // create application/x-www-form-urlencoded parser
+// var urlencodedParser = bodyParser.urlencoded({ extended: false });;
+// // parse various different custom JSON types as JSON
+// app.use(bodyParser.json({ type: 'application/*+json' }))
+
+// // parse some custom thing into a Buffer
+// app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
+
+// // parse an HTML body into a string
+// app.use(bodyParser.text({ type: 'text/html'}));
+
+// // POST /login gets urlencoded bodies
+// app.post('/api/message/:recipient', urlencodedParser, function (req, res) {
+//   console.log(req.body)
+//   res.send('erfolgreich gespeichert');
+// })
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/message', messagesRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

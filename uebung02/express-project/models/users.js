@@ -1,4 +1,8 @@
+"use strict";
+
 var mongoose = require("mongoose");
+var UserMessage = require("../models/messages.js").schema;
+var schemaMessage = require("../models/messages.js").schema;
 
 var UserSchema = new mongoose.Schema(
   {
@@ -14,14 +18,14 @@ var UserSchema = new mongoose.Schema(
 
     userType: {
       type: String,
-      enum : ['user','admin','mod'],
-      default: 'user'
-  },
+      enum: ["user", "admin", "mod"],
+      default: "user",
+    },
 
     registered: {
-        type: Date,
-        default: Date.now
-        },
+      type: Date,
+      default: Date.now,
+    },
 
     email: {
       type: String,
@@ -34,10 +38,17 @@ var UserSchema = new mongoose.Schema(
     image: String,
     password: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
+    messages:  [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Messages',
+      },
+    ],
   },
+
   { timestamps: true }
 );
 
-module.exports = User = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Users", UserSchema)  

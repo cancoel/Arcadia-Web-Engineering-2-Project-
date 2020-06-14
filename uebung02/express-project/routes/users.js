@@ -1,12 +1,16 @@
+
+'use strict';
+
+
 var express = require("express");
 var router = express.Router();
 const User = require("../models/users.js");
 
 /* GET users listing. */
-router.get("/", function (req, res) {
+router.get("/", function (request, response) {
   User.find()
     .then((user) => {
-      res.json(user);
+      response.json(user);
     })
     .catch((error) => {
       console.error(error);
@@ -113,7 +117,7 @@ router.delete("/remove/:id", (request, response) => {
         // suche erfolgreich
         users.forEach((user) => {
           if (user.password === request.body.password) {
-            User.deleteOne({
+            deleteOne({
               _id: request.params.id
             })
               .then((user) => {
@@ -178,7 +182,7 @@ router.patch("/edit/:id", (request, response) => {
 // });
 
 
-User.findByIdAndUpdate(
+  User.findByIdAndUpdate(
   {
     _id: request.params.id
   },
