@@ -81,4 +81,19 @@ router.post("/:recipient", (request, response) => {
     });
 });
 
+
+router.delete('/remove/:id', (request, response) => {
+  UserMessage.findOneAndDelete({
+      _id: request.params.id
+  })
+  .then((message) => {
+      response.status(200).json(message);
+  })
+  .catch((_) => {
+      response.status(404).json({
+          error: 'Message not found'
+      });
+  });
+})
+
 module.exports = router;

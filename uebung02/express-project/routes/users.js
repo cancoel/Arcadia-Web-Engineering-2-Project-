@@ -1,12 +1,10 @@
-
-'use strict';
-
+"use strict";
 
 var express = require("express");
 var router = express.Router();
 const User = require("../models/users.js");
 
-/* GET users listing. */
+// Route to get all users
 router.get("/", function (request, response) {
   User.find()
     .then((user) => {
@@ -17,19 +15,26 @@ router.get("/", function (request, response) {
     });
 });
 
+// Route to get an user by id
 router.get("/:id", function (request, response) {
-  // console.log(req.body)
   User.find({
-    _id: request.params.id
+    _id: request.params.id,
   })
     .then((user) => {
-      response.status(200).json(user);
+      if (user.length) {
+        response.status(200).json(user);
+      } else {
+        response.status(404).json({
+          error: "User not found",
+        });
+      }
     })
     .catch((error) => {
-      console.error(error);
+      response.status(500).json(error);
     });
 });
 
+// Route to register a new user
 router.post("/register", (request, response) => {
   User.find()
     .or([{ email: request.body.email }, { username: request.body.username }])
@@ -74,6 +79,7 @@ router.post("/register", (request, response) => {
     });
 });
 
+// Route to user login
 router.post("/login", (request, response) => {
   User.find()
     .or([{ email: request.body.email }, { username: request.body.username }])
@@ -108,17 +114,18 @@ router.post("/login", (request, response) => {
     });
 });
 
+// Route to delete an user
 router.delete("/remove/:id", (request, response) => {
   User.find({
-    _id: request.params.id
+    _id: request.params.id,
   })
     .then((users) => {
       if (users.length) {
         // suche erfolgreich
         users.forEach((user) => {
           if (user.password === request.body.password) {
-            deleteOne({
-              _id: request.params.id
+            User.deleteOne({
+              _id: request.params.id,
             })
               .then((user) => {
                 response.status(200).json(user);
@@ -144,9 +151,15 @@ router.delete("/remove/:id", (request, response) => {
           });
         }
       }
+    })
+    .catch((error) => {
+      response.status(500).json({
+        error: "kaputt du lauch",
+      });
     });
 });
 
+// Route to edit an user
 router.patch("/edit/:id", (request, response) => {
   // NOT NEEDED IF UPDATE === request.body
   // only update the passed request properties
@@ -159,46 +172,45 @@ router.patch("/edit/:id", (request, response) => {
   //   }
   // }
 
-// Suchen und ändern über Username. Wird nicht mehr benutzt, wird nun über die id
-// realisiert 
+  // Suchen und ändern über Username. Wird nicht mehr benutzt, wird nun über die id
+  // realisiert
 
-//   User.findOneAndUpdate(
-//     {
-//       username: request.body.username
-//     },
-//     request.body,
-//     {
-//       upsert: false,
-//       new: true,
-//     }
-//   ).then((user) => {
-//     if (!user) {
-//       response.status(400).json({
-//         error: 'Username not found'
-//       });
-//     }
-//     response.status(200).json(user);
-//   });
-// });
-
+  //   User.findOneAndUpdate(
+  //     {
+  //       username: request.body.username
+  //     },
+  //     request.body,
+  //     {
+  //       upsert: false,
+  //       new: true,
+  //     }
+  //   ).then((user) => {
+  //     if (!user) {
+  //       response.status(400).json({
+  //         error: 'Username not found'
+  //       });
+  //     }
+  //     response.status(200).json(user);
+  //   });
+  // });
 
   User.findByIdAndUpdate(
-  {
-    _id: request.params.id
-  },
-  request.body,
-  {
-    upsert: false,
-    new: true,
-  }
-).then((user) => {
-  if (!user) {
-    response.status(400).json({
-      error: 'Username not found'
-    });
-  }
-  response.status(200).json(user);
-});
+    {
+      _id: request.params.id,
+    },
+    request.body,
+    {
+      upsert: false,
+      new: true,
+    }
+  ).then((user) => {
+    if (!user) {
+      response.status(400).json({
+        error: "Username not found",
+      });
+    }
+    response.status(200).json(user);
+  });
 });
 
 module.exports = router;

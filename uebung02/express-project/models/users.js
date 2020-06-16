@@ -1,8 +1,8 @@
 "use strict";
 
 var mongoose = require("mongoose");
-var UserMessage = require("../models/messages.js").schema;
-var schemaMessage = require("../models/messages.js").schema;
+// var UserMessage = require("../models/messages.js").schema;
+// var schemaMessage = require("../models/messages.js").schema;
 
 var UserSchema = new mongoose.Schema(
   {
@@ -46,6 +46,18 @@ var UserSchema = new mongoose.Schema(
         ref: 'Messages',
       },
     ],
+    threads: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Thread',
+      },
+    ],
+    replies: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reply',
+      },
+    ]
   },
 
   { timestamps: true }

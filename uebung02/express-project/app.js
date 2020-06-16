@@ -11,7 +11,10 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var messagesRouter = require("./routes/messages.js");
+var messagesRouter = require("./routes/messages");
+var threadRouter = require('./routes/thread');
+var replyRouter = require('./routes/reply');
+
 const { config } = require('process');
 const { request } = require('http');
 
@@ -54,6 +57,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/message', messagesRouter);
+app.use('/api/threads', threadRouter);
+app.use('/api/threads', replyRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

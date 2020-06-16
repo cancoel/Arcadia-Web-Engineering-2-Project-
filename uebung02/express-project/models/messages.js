@@ -15,8 +15,10 @@ var UserMessage = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  content: { type: String },
+  content: {
+    type: String,
+    required: true,
+  },
 });
-
 
 module.exports = mongoose.model("Messages", UserMessage);

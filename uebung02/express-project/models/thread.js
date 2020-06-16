@@ -1,44 +1,31 @@
 "use strict";
 
-import { Schema, model } from "mongoose";
-import user from "./users";
+var mongoose = require("mongoose");
+// var ReplySchema = require("./reply");
 
-var MessageSchema = new Schema(
-  {
-    users: {
-      type: user,
-      required: [true, "participients needed"],
-      ref: "User",
-    },
-
-    messages: [
-      {
-        message: String,
-        minlength: 1,
-        maxlength: 1000,
-        meta: [
-          {
-            user: {
-             
-              ref: "User",
-            },
-            delivered: Boolean
-          },
-        ],
-      },
-    ],
-    group_name: {
-      type: String,
-    },
-    created_by: {
-      type: ObjectId,
-      ref: "User",
-    },
-
-    image_url: {
-      type: String,
-    },
+const ThreadSchema = mongoose.Schema({
+  title: {
+    required: true,
+    type: String,
   },
-);
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  Date: {
+    type: Date,
+    default: Date.now,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  replies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reply",
+    },
+  ],
+});
 
-export default mongoose.model("MsgThread", MsgThreadSchema);
+module.exports = mongoose.model("Thread", ThreadSchema);

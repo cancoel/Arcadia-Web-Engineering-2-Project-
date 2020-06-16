@@ -1,0 +1,101 @@
+// get all users
+GET http://localhost:5000/api/users
+
+###
+// register user "Can1"
+POST http://localhost:5000/api/users/register?username=can1&password=qwerty&email=a@b.de HTTP/1.1
+content-type: application/json
+
+{
+    "username":"Can2",
+    "password":"qwerty",
+    "email":"test@can.com"
+}
+
+###
+// delete user by id
+DELETE http://localhost:5000/api/users/remove/5ee8c22d440d4c038b4511af
+content-type: application/json
+
+{
+    "password":"qwerty"
+} 
+
+
+###
+// login with username and password
+POST http://localhost:5000/api/users/login
+content-type: application/json
+
+{
+    "username":"can1",
+    "password":"qwerty"
+}
+
+###
+// get user with by id
+GET http://localhost:5000/api/users/5ee8c22d440d4c038b4511af
+
+
+###
+// send a message to an user by recipients id
+POST http://localhost:5000/api/message/5ee8c4c5440d4c038b4511b1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "sender": "5ee8c468440d4c038b4511b0",
+    "message":"eierkopf du" 
+}
+
+###
+// get all messages in db
+GET http://localhost:5000/api/message
+
+###
+// get message by user id
+GET http://localhost:5000/api/message/5ee8c4c5440d4c038b4511b1
+
+###
+// delete message by message_id
+DELETE http://localhost:5000/api/message/remove/5ee8c50a440d4c038b4511b2
+
+###
+// post new thread
+POST http://localhost:5000/api/threads
+Content-Type: application/json
+
+{
+    "title":"was geht was geht",
+    "author": "5ee8c468440d4c038b4511b0",
+    "content":"na du sack"
+}
+
+###
+// get all existing threads
+GET http://localhost:5000/api/threads
+
+###
+// get thread by id
+GET http://localhost:5000/api/threads/5ee8c5f5440d4c038b4511b5
+
+###
+// delete thread by id
+DELETE http://localhost:5000/api/threads/remove/5ee8c5f5440d4c038b4511b5
+
+###
+// edit thread by id
+PATCH http://localhost:5000/api/threads/edit/5ee65ffd809e9551a7514b82
+Content-Type: application/json
+
+{
+    "title":"hello again",
+    "content":"hey, ich bins wieder!"
+}
+
+###
+// get reply by id
+GET http://localhost:5000/api/threads/reply/5ee7a6b4abab9b6380372342
+
+###
+// post reply from a user_id
+POST http://localhost:5000/api/threads/5ee65ffd809e9551a7514b82/reply
