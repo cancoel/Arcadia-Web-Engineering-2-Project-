@@ -1,6 +1,10 @@
 {
-    "db": {
+  "db": {
     "connectionOptions": "{ useNewUrlParser: true, useUnifiedTopology: true }",
     "connectionString": "mongodb://localhost:27017/test"
-    }
+  },
+
+  "session": {
+    "token": "Very-Strong-Key-For-Me"
+  }
 }

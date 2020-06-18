@@ -1,15 +1,18 @@
 // get all users
 GET http://localhost:5000/api/users
+Authorization: Basic Y2FuY29lbDpxd2VydHk=
 
 ###
 // register user "Can1"
-POST http://localhost:5000/api/users/register?username=can1&password=qwerty&email=a@b.de HTTP/1.1
+POST http://localhost:5000/api/users/register HTTP/1.1
+//Authorization: Basic RnJlZDpxd2VydHk=
 content-type: application/json
 
 {
-    "username":"Can2",
+    "username":"cancoel2",
     "password":"qwerty",
-    "email":"test@can.com"
+    "email":"test@wefrwe2r.com",
+    "userTypeAdmin":true
 }
 
 ###
@@ -28,13 +31,14 @@ POST http://localhost:5000/api/users/login
 content-type: application/json
 
 {
-    "username":"can1",
+    "username":"cancoel",
     "password":"qwerty"
 }
 
 ###
 // get user with by id
-GET http://localhost:5000/api/users/5ee8c22d440d4c038b4511af
+GET http://localhost:5000/api/users/5eea85e70115a73f55dee58c
+Authorization: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJUeXBlQWRtaW4iOnRydWUsIm1lc3NhZ2VzIjpbXSwidGhyZWFkcyI6W10sInJlcGxpZXMiOltdLCJfaWQiOiI1ZWVhODVlNzAxMTVhNzNmNTVkZWU1OGMiLCJ1c2VybmFtZSI6ImNhbmNvZWwiLCJlbWFpbCI6InRlc3RAd2Vmcndlci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR0RjZnU0s0c0FQQzN6S0VDSmhYbm51MmdGQlcxWlR3MEJpTERkNjVRS3EuQjYzcXBTUUk3RyIsInJlZ2lzdGVyZWQiOiIyMDIwLTA2LTE3VDIxOjA2OjQ3Ljc4NVoiLCJjcmVhdGVkQXQiOiIyMDIwLTA2LTE3VDIxOjA2OjQ3Ljc4OFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTA2LTE3VDIxOjA2OjQ3Ljc4OFoiLCJfX3YiOjB9LCJpYXQiOjE1OTI0MjgxODksImV4cCI6MTU5MjQyODM4OX0.t6Cfdl9DowcAuwxmaQGTwxAoyXXO7Z-GRltLT4gmelY
 
 
 ###

@@ -16,10 +16,9 @@ var UserSchema = new mongoose.Schema(
       index: true,
     },
 
-    userType: {
-      type: String,
-      enum: ["user", "admin", "mod"],
-      default: "user",
+    userTypeAdmin: {
+      type: Boolean,
+      default: false,
     },
 
     registered: {
@@ -40,27 +39,27 @@ var UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    messages:  [
+    messages: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Messages',
+        ref: "Messages",
       },
     ],
     threads: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Thread',
+        ref: "Thread",
       },
     ],
     replies: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Reply',
+        ref: "Reply",
       },
-    ]
+    ],
   },
 
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Users", UserSchema)  
+module.exports = mongoose.model("Users", UserSchema);

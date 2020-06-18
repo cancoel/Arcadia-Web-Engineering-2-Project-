@@ -14,6 +14,7 @@ var usersRouter = require('./routes/users');
 var messagesRouter = require("./routes/messages");
 var threadRouter = require('./routes/thread');
 var replyRouter = require('./routes/reply');
+var authHandler = require('./services/authHandler');
 
 const { config } = require('process');
 const { request } = require('http');
@@ -22,12 +23,12 @@ var app = express();
 
 
 // // create application/json parser
-// var jsonParser = bodyParser.json();
+var jsonParser = bodyParser.json();
 
 // // create application/x-www-form-urlencoded parser
 // var urlencodedParser = bodyParser.urlencoded({ extended: false });;
 // // parse various different custom JSON types as JSON
-// app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json({ type: 'application/*+json' }))
 
 // // parse some custom thing into a Buffer
 // app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
@@ -60,10 +61,6 @@ app.use('/api/message', messagesRouter);
 app.use('/api/threads', threadRouter);
 app.use('/api/threads', replyRouter);
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
 
 // error handler
 app.use(function(err, req, res, next) {
