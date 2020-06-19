@@ -4,7 +4,6 @@ var express = require("express");
 var User = require("../models/users.js");
 var UserMessage = require("../models/messages.js");
 var router = express.Router();
-var message = require("../models/messages.js");
 
 // Route to get all messages
 router.get("/", (request, response) => {

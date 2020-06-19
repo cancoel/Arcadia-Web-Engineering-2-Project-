@@ -3,10 +3,8 @@
 var express = require("express");
 var router = express.Router();
 const User = require("../models/users.js");
-const userService = require("../services/userService");
 var bcrypt = require("../services/bcrypt");
 const authHandler = require("../services/authHandler");
-const { set } = require("../app.js");
 const { isAuthenticated, renderBase64 } = require("../services/authHandler");
 
 // Route to get all users
@@ -98,10 +96,8 @@ router.post("/register", (request, response) => {
 // Route to user login
 router.post("/login", renderBase64) 
  
+// wird nicht mehr verwendet, ab jetzt im authHandler.js für das Login!
 
-
-
-  
   // User.find()
   //   .or([{ email: request.body.email }, { username: request.body.username }])
   //   .then((users) => {
@@ -154,7 +150,6 @@ router.delete("/remove/:id", isAuthenticated, (request, response) => {
           // suche erfolgreich
        
           users.forEach((user) => {
-            console.log(user.password);
             if (user.password === request.body.password) {
               User.deleteOne({
                 _id: request.params.id,
@@ -186,7 +181,7 @@ router.delete("/remove/:id", isAuthenticated, (request, response) => {
       })
       .catch((error) => {
         response.status(500).json({
-          error: "kaputt du lauch",
+          error: "Undefined Error!",
         });
       });
   } else {

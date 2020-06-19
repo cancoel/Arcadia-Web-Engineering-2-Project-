@@ -4,7 +4,6 @@ var express = require("express");
 var router = express.Router();
 var Thread = require("../models/thread.js");
 var User = require("../models/users");
-const { response } = require("../app.js");
 
 // Route to post a new thread
 router.post("/", (request, response) => {

@@ -1,7 +1,6 @@
 "use strict";
 
 var mongoose = require("mongoose");
-// var ReplySchema = require("./reply");
 
 const ThreadSchema = mongoose.Schema({
   title: {

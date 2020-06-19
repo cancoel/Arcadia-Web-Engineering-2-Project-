@@ -1,8 +1,6 @@
 "use strict";
 
 var mongoose = require("mongoose");
-// var UserMessage = require("../models/messages.js").schema;
-// var schemaMessage = require("../models/messages.js").schema;
 
 var UserSchema = new mongoose.Schema(
   {

@@ -1,9 +1,9 @@
 // get all users
-GET http://localhost:5000/api/users
+GET https://localhost:443/api/users
 Authorization: jwt-token 
 ###
 // register user "Can1"
-POST http://localhost:5000/api/users/register 
+POST https://localhost:443/api/users/register 
 //Authorization: Basic RnJlZDpxd2VydHk=
 content-type: application/json
 
@@ -34,58 +34,58 @@ Authorization: Y2FuY29lbDpxd2VydHk=
 
 ###
 // get user with by id
-GET http://localhost:5000/api/users/5eea86856de47b3f9bb36b51
+GET https://localhost:443/api/users/5eea86856de47b3f9bb36b51
 Token: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbCIsImFkbWluIjp0cnVlfSwiaWF0IjoxNTkyNTg3NDg3LCJleHAiOjE1OTI1ODc1MTd9.i4jcDCAcVInZZylKexRSb1M_4WHUGZXtzwFQeXGrr74
 
 
 ###
 // send a message to an user by recipients id
-POST http://localhost:5000/api/message/5ee8c4c5440d4c038b4511b1 HTTP/1.1
+POST https://localhost:443/api/message/5ee8c4c5440d4c038b4511b1 HTTP/1.1
 Content-Type: application/json
 
 {
     "sender": "5ee8c468440d4c038b4511b0",
-    "message":"eierkopf du" 
+    "message":"Testnachricht" 
 }
 
 ###
 // get all messages in db
-GET http://localhost:5000/api/message
+GET https://localhost:443/api/message
 
 ###
 // get message by user id
-GET http://localhost:5000/api/message/5ee8c4c5440d4c038b4511b1
+GET https://localhost:443/api/message/5ee8c4c5440d4c038b4511b1
 
 ###
 // delete message by message_id
-DELETE http://localhost:5000/api/message/remove/5ee8c50a440d4c038b4511b2
+DELETE https://localhost:443/api/message/remove/5ee8c50a440d4c038b4511b2
 
 ###
 // post new thread
-POST http://localhost:5000/api/threads
+POST https://localhost:443/api/threads
 Content-Type: application/json
 
 {
-    "title":"was geht was geht",
+    "title":"Vorstellung",
     "author": "5ee8c468440d4c038b4511b0",
-    "content":"na du sack"
+    "content":"Hallo, ich bin der neue User!"
 }
 
 ###
 // get all existing threads
-GET http://localhost:5000/api/threads
+GET https://localhost:443/api/threads
 
 ###
 // get thread by id
-GET http://localhost:5000/api/threads/5ee8c5f5440d4c038b4511b5
+GET https://localhost:443/api/threads/5ee8c5f5440d4c038b4511b5
 
 ###
 // delete thread by id
-DELETE http://localhost:5000/api/threads/remove/5ee8c5f5440d4c038b4511b5
+DELETE https://localhost:443/api/threads/remove/5ee8c5f5440d4c038b4511b5
 
 ###
 // edit thread by id
-PATCH http://localhost:5000/api/threads/edit/5ee65ffd809e9551a7514b82
+PATCH https://localhost:443/api/threads/edit/5ee65ffd809e9551a7514b82
 Content-Type: application/json
 
 {
@@ -95,8 +95,8 @@ Content-Type: application/json
 
 ###
 // get reply by id
-GET http://localhost:5000/api/threads/reply/5ee7a6b4abab9b6380372342
+GET https://localhost:443/api/threads/reply/5ee7a6b4abab9b6380372342
 
 ###
 // post reply from a user_id
-POST http://localhost:5000/api/threads/5ee65ffd809e9551a7514b82/reply
+POST https://localhost:443/api/threads/5ee65ffd809e9551a7514b82/reply
