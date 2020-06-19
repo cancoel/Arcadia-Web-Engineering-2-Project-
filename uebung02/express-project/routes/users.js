@@ -33,7 +33,7 @@ router.get("/:id", isAuthenticated, function (request, response) {
           userTypeAdmin: user.userTypeAdmin,
         };
         response.status(200).json(JSONblock);
-        console.log(user);
+        // console.log(user);
       } else {
         response.status(404).json({
           error: "User not found",
@@ -112,7 +112,7 @@ router.post("/login", (request, response) => {
             bcrypt.decrypt(request.body.password, user.password, (isMatch) => {
               if (isMatch) {
                 userService.createToken(user, (token) => {
-                  response.setHeader("jwt-token", token);
+                  response.setHeader("Authorization", "jwt-token "+ token);
                   response.status(200).json(user);
                 });
               } else {
@@ -139,7 +139,7 @@ router.post("/login", (request, response) => {
 });
 
 // Route to delete an user
-router.delete("/remove/:id", (request, response) => {
+router.delete("/remove/:id", isAuthenticated, (request, response) => {
   User.find({
     _id: request.params.id,
   })

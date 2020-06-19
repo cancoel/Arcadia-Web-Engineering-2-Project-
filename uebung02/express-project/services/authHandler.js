@@ -5,7 +5,6 @@ var userService = require("./userService");
 const { token } = require("morgan");
 var jwt = require("jsonwebtoken");
 var config = require("../config/default.json");
-const { request } = require("../app");
 
 authHandler.use((request, response, next) => {
   console.log("Header", request.headers.authorization);
@@ -39,39 +38,33 @@ authHandler.use((request, response, next) => {
 });
 
 authHandler.isAuthenticated = (req, res, next) => {
-  console.log(typeof req.headers.authorization);
   if (typeof req.headers.authorization !== "undefined") {
     let token = req.headers.authorization.split(" ")[1];
     var privateKey = config.session.token;
     jwt.verify(token, privateKey, { algorithm: "HS256" }, (err, payload) => {
       if (err) {
-        res.status(500).json({ error: "Not Authorized" });
-        return;
+        console.log("TOKEN EXPIRED");
+        const username = req.body.username;
+        userService.createToken(username, (token) => {
+          res.setHeader("Authorization","jwt-token "+ token);
+        });
+        return next();
       }
-      return next();
+      else {
+      const nowUnixSeconds = Math.round(Number(new Date()) / 1000);
+      console.log(payload.exp - nowUnixSeconds)
+        if (payload.exp - nowUnixSeconds > 30) {
+          userService.createToken(payload.user, (token) => {
+            res.setHeader("Authorization","jwt-token "+ token);
+          });
+        }
+        next();
+      }
     });
   } else {
-    res.status(500).json({ error: "Not Authorized" });
+    res.status(500).json({ error: "Not Authorized, No Header" });
     return;
   }
-
-  var payload;
-  try {
-    payload = jwt.verify(token, jwtKey);
-  } catch (e) {
-    if (e instanceof jwt.JsonWebTokenError) {
-      return res.status(401).end();
-    }
-    return res.status(400).end();
-  }
-  const nowUnixSeconds = Math.round(Number(new Date()) / 1000);
-  if (payload.exp - nowUnixSeconds > 30) {
-    return res.status(400).end();
-  }
-  const newToken = jwt.sign({ username: payload.username }, jwtKey, {
-    algorithm: "HS256",
-    expiresIn: jwtExpirySeconds,
-  });
 };
 
 module.exports = authHandler;
