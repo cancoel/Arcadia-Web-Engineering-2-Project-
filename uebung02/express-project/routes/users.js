@@ -7,7 +7,7 @@ const userService = require("../services/userService");
 var bcrypt = require("../services/bcrypt");
 const authHandler = require("../services/authHandler");
 const { set } = require("../app.js");
-const { isAuthenticated } = require("../services/authHandler");
+const { isAuthenticated, renderBase64 } = require("../services/authHandler");
 
 // Route to get all users
 router.get("/", isAuthenticated, function (request, response) {
@@ -96,91 +96,104 @@ router.post("/register", (request, response) => {
 });
 
 // Route to user login
-router.post("/login", (request, response) => {
-  User.find()
-    .or([{ email: request.body.email }, { username: request.body.username }])
-    .then((users) => {
-      if (users.length) {
-        // suche erfolgreich
-        users.forEach((user) => {
-          if (
-            user.username === request.body.username ||
-            user.email === request.body.email
-          ) {
-            // wenn user gefunden wurde, wird das angegebene passwort im body mit dem
-            // gehashten psswort in der DB abgegelichen
-            bcrypt.decrypt(request.body.password, user.password, (isMatch) => {
-              if (isMatch) {
-                userService.createToken(user, (token) => {
-                  response.setHeader("Authorization", "jwt-token "+ token);
-                  response.status(200).json(user);
-                });
-              } else {
-                response.status(400).json({
-                  error: "Password incorrect",
-                });
-              }
-            });
-          }
-        });
-      } else {
-        if (request.body.username) {
-          response.status(400).json({
-            error: "Username not found",
-          });
-        }
-        if (request.body.email) {
-          response.status(400).json({
-            error: "Email not found",
-          });
-        }
-      }
-    });
-});
+router.post("/login", renderBase64) 
+ 
+
+
+
+  
+  // User.find()
+  //   .or([{ email: request.body.email }, { username: request.body.username }])
+  //   .then((users) => {
+  //     if (users.length) {
+  //       // suche erfolgreich
+  //       users.forEach((user) => {
+  //         if (
+  //           user.username === request.body.username ||
+  //           user.email === request.body.email
+  //         ) {
+  //           // wenn user gefunden wurde, wird das angegebene passwort im body mit dem
+  //           // gehashten psswort in der DB abgegelichen
+  //           bcrypt.decrypt(request.body.password, user.password, (isMatch) => {
+  //             if (isMatch) {
+  //               userService.createToken(user, (token) => {
+  //                 response.setHeader("Token", "jwt-token " + token);
+  //                 response.status(200).json(user);
+  //               });
+  //             } else {
+  //               response.status(400).json({
+  //                 error: "Password incorrect",
+  //               });
+  //             }
+  //           });
+  //         }
+  //       });
+  //     } else {
+  //       if (request.body.username) {
+  //         response.status(400).json({
+  //           error: "Username not found",
+  //         });
+  //       }
+  //       if (request.body.email) {
+  //         response.status(400).json({
+  //           error: "Email not found",
+  //         });
+  //       }
+  //     }
+  //   });
+
 
 // Route to delete an user
 router.delete("/remove/:id", isAuthenticated, (request, response) => {
-  User.find({
-    _id: request.params.id,
-  })
-    .then((users) => {
-      if (users.length) {
-        // suche erfolgreich
-        users.forEach((user) => {
-          if (user.password === request.body.password) {
-            User.deleteOne({
-              _id: request.params.id,
-            })
-              .then((user) => {
-                response.status(200).json(user);
+  if (request.payload.user.admin) {
+    User.find({
+      _id: request.params.id,
+    })
+      .then((users) => {
+        if (users.length) {
+          // suche erfolgreich
+       
+          users.forEach((user) => {
+            console.log(user.password);
+            if (user.password === request.body.password) {
+              User.deleteOne({
+                _id: request.params.id,
               })
-              .catch((error) => {
-                response.status(500).json(error);
+                .then((user) => {
+                  response.status(200).json(user);
+                })
+                .catch((error) => {
+                  response.status(500).json(error);
+                });
+            } else {
+              response.status(403).json({
+                error: "Password incorrect!",
               });
-          } else {
-            response.status(403).json({
-              error: "Password incorrect!",
+            }
+          });
+        } else {
+          if (request.body.username) {
+            response.status(400).json({
+              error: "Username not found",
             });
           }
+          if (request.body.email) {
+            response.status(400).json({
+              error: "Email not found",
+            });
+          }
+        }
+      })
+      .catch((error) => {
+        response.status(500).json({
+          error: "kaputt du lauch",
         });
-      } else {
-        if (request.body.username) {
-          response.status(400).json({
-            error: "Username not found",
-          });
-        }
-        if (request.body.email) {
-          response.status(400).json({
-            error: "Email not found",
-          });
-        }
-      }
-    })
-    .catch((error) => {
-      response.status(500).json({
-        error: "kaputt du lauch",
       });
+  } else {
+    response.status(400).json({
+      error: "Not allowed!",
     });
+  }
 });
 
 // Route to edit an user

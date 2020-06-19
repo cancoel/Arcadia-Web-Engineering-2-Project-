@@ -2,7 +2,6 @@
 
 var authHandler = require("express").Router();
 var userService = require("./userService");
-const { token } = require("morgan");
 var jwt = require("jsonwebtoken");
 var config = require("../config/default.json");
 
@@ -15,7 +14,7 @@ authHandler.use((request, response, next) => {
     response.statusCode = 401;
     response.setHeader("WWW-Authenticate", 'Basic realm="Secure Area"');
     return response.json({
-      message: "Missing Authorization Header Gib die daten",
+      message: "Missing Authorization Header",
     });
   }
 
@@ -27,7 +26,8 @@ authHandler.use((request, response, next) => {
   const [username, password] = credentials.split(":");
 
   // Authenticate base64-decoded username and password
-  userService.getUser(username, password, (isMatch, error) => {
+  userService.getUser(username, password, (isMatch, error, user) => {
+    console.log(user);
     if (isMatch) {
       const token = userService.createToken(username);
       response.setHeader("jwt-token", token);
@@ -46,24 +46,43 @@ authHandler.isAuthenticated = (req, res, next) => {
         console.log("TOKEN EXPIRED");
         const username = req.body.username;
         userService.createToken(username, (token) => {
-          res.setHeader("Authorization","jwt-token "+ token);
+          res.setHeader("Token", "jwt-token " + token);
         });
         return next();
-      }
-      else {
-      const nowUnixSeconds = Math.round(Number(new Date()) / 1000);
-      console.log(payload.exp - nowUnixSeconds)
+      } else {
+        req.payload = payload;
+        console.log(payload);
+        const nowUnixSeconds = Math.round(Number(new Date()) / 1000);
+        console.log(payload.exp - nowUnixSeconds);
         if (payload.exp - nowUnixSeconds > 30) {
           userService.createToken(payload.user, (token) => {
-            res.setHeader("Authorization","jwt-token "+ token);
+            res.setHeader("Token", "jwt-token " + token);
           });
         }
         next();
       }
     });
   } else {
-    res.status(500).json({ error: "Not Authorized, No Header" });
+    res.status(500).json({ error: "Not Authorized: No Header" });
     return;
+  }
+};
+
+authHandler.renderBase64 = (req, res, next) => {
+  if (req.headers.authorization) {
+    const base64Credentials = req.headers.authorization.split(" ")[0];
+    const credentials = Buffer.from(base64Credentials, "base64").toString(
+      "ascii"
+    );
+    const [username, password] = credentials.split(":");
+    userService.getUser(username, password, (isMatch, error, user) => {
+      if (isMatch) {
+        userService.createToken({username:user.username, admin:user.userTypeAdmin}, (token) => {
+          res.setHeader("Token", "jwt-token " + token);
+        });
+        res.status(200).json("Logged in");
+      }
+    });
   }
 };
 

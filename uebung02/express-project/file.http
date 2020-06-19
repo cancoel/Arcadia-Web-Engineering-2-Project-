@@ -1,10 +1,9 @@
 // get all users
 GET http://localhost:5000/api/users
-Authorization: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJUeXBlQWRtaW4iOnRydWUsIm1lc3NhZ2VzIjpbXSwidGhyZWFkcyI6W10sInJlcGxpZXMiOltdLCJfaWQiOiI1ZWVhODVlNzAxMTVhNzNmNTVkZWU1OGMiLCJ1c2VybmFtZSI6ImNhbmNvZWwiLCJlbWFpbCI6InRlc3RAd2Vmcndlci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR0RjZnU0s0c0FQQzN6S0VDSmhYbm51MmdGQlcxWlR3MEJpTERkNjVRS3EuQjYzcXBTUUk3RyIsInJlZ2lzdGVyZWQiOiIyMDIwLTA2LTE3VDIxOjA2OjQ3Ljc4NVoiLCJjcmVhdGVkQXQiOiIyMDIwLTA2LTE3VDIxOjA2OjQ3Ljc4OFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTA2LTE3VDIxOjA2OjQ3Ljc4OFoiLCJfX3YiOjB9LCJpYXQiOjE1OTI1NzA3NzAsImV4cCI6MTU5MjU3MTA3MH0._zVuS9J0Dl9YiwFILBB0nG5f42vDww91tGIPIJ0fw9M
-
+Authorization: jwt-token 
 ###
 // register user "Can1"
-POST http://localhost:5000/api/users/register HTTP/1.1
+POST http://localhost:5000/api/users/register 
 //Authorization: Basic RnJlZDpxd2VydHk=
 content-type: application/json
 
@@ -12,12 +11,13 @@ content-type: application/json
     "username":"cancoel2",
     "password":"qwerty",
     "email":"test@wefrwe2r.com",
-    "userTypeAdmin":true
+    "userTypeAdmin":false
 }
 
 ###
 // delete user by id
-DELETE http://localhost:5000/api/users/remove/5ee8c22d440d4c038b4511af
+DELETE https://localhost:443/api/users/remove/5eecf8cc390882b78f2f9483
+Authorization: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbCIsImFkbWluIjp0cnVlfSwiaWF0IjoxNTkyNTg4NTIwLCJleHAiOjE1OTI1ODg4MjB9.50Koe6Lewux9hK_DSZ2UKnUA3juMKPyz0y3TJGnZHwM
 content-type: application/json
 
 {
@@ -27,20 +27,15 @@ content-type: application/json
 
 ###
 // login with username and password
-POST http://localhost:5000/api/users/login
+POST https://localhost:443/api/users/login
 content-type: application/json
+Authorization: Y2FuY29lbDpxd2VydHk=
 
-{
-    "username":"cancoel",
-    "password":"qwerty"
-}
 
 ###
 // get user with by id
 GET http://localhost:5000/api/users/5eea86856de47b3f9bb36b51
-Authorization: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTI1ODA2MzcsImV4cCI6MTU5MjU4MDY2N30.DXWRI3WAO9KSaxJ6J_K7aipOyhjdd0s2MbjlaYTaBLY
-
-
+Token: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbCIsImFkbWluIjp0cnVlfSwiaWF0IjoxNTkyNTg3NDg3LCJleHAiOjE1OTI1ODc1MTd9.i4jcDCAcVInZZylKexRSb1M_4WHUGZXtzwFQeXGrr74
 
 
 ###
