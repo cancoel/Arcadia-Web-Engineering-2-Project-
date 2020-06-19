@@ -5,19 +5,14 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var connection = require("./dbcon.js");
-var users = require("./models/users.js");
 var bodyParser = require("body-parser");
+var process = require("process");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var messagesRouter = require("./routes/messages");
 var threadRouter = require("./routes/thread");
 var replyRouter = require("./routes/reply");
-var authHandler = require("./services/authHandler");
-
-const { config } = require("process");
-const { request } = require("http");
 
 var app = express();
 
@@ -68,9 +63,9 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log("Server running on port", port);
-});
+// const port = process.env.PORT || 443;
+// app.listen(port, () => {
+//   console.log("Server running on port", port);
+// });
 
 module.exports = app;
