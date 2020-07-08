@@ -29,7 +29,7 @@ content-type: application/json
 // login with username and password
 POST https://localhost:443/api/users/login
 content-type: application/json
-Authorization: "Y2FuY29lbDI6cXdlcnR5"
+Authorization: Y2FuY29lbDI6cXdlcnR5
 
 
 ###

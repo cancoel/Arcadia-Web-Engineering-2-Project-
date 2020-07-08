@@ -1,0 +1,27 @@
+.card {
+    margin: 5rem;
+    background-color: rgb(15, 155, 142) !important;
+    cursor: pointer;
+    max-width: 50rem;
+  }
+  
+  .category:hover {
+    background-color: rgb(164, 21, 163) !important;
+    text-decoration: none !important;
+  }
+  
+  .card-body {
+    background-color: rgb(35, 35, 35) !important;
+    color: gainsboro !important;
+  }
+  
+  .card-footer {
+    background-color: rgb(40, 40, 40) !important; 
+  }
+  
+  .card-img-top {
+    height: 15em;
+    object-fit: contain;
+    padding: 1em;
+    opacity: 0.5;
+  }
