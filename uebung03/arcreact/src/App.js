@@ -1,47 +1,35 @@
 import React, { Component } from "react";
 import "./App.css";
-import PublicPage from "./components/public/PublicPage";
-import PrivatePage from "./components/private/PrivatePage";
+import Content from './components/shared/Content';
 import { connect } from "react-redux";
-// import Router from "./components/shared/Routy";
-import { BrowserRouter as Router, Switch, Route, withRouter, NavLink } from "react-router-dom";
-import PrivateRoute from "./components/private/PrivateRoute";
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <BrowserRouter>
-//         <Switch>
-//           <Route path="/private" component={PrivatePage} />
-//           <Route path="/" component={PublicPage} />
-//         </Switch>
-//       </BrowserRouter>
-//     );
-//   }
+class App extends Component {
+  render() {
+    const user = this.props.users.item; // user from redux store
+    const isLoggedIn = user !== null; // is someone logged in?
+    return (
+      <div className="App">
+        <Content isLoggedIn={isLoggedIn}/>
+      </div>
+    );
+  }
+}
 
-// render() {
-//   const user = this.props.users.item;
-//   const content = user ? <PrivatePage /> : <PublicPage />;
-//   return <div className="App">{content}</div>;
-// }
-// }
-
-// const mapStateToProps = (state) => {
-//   return state
-// }
-
-// export default withRouter(connect(mapStateToProps)(App));
-// export default connect(mapStateToProps)(App);
-
-const App = () => {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/private" component={PrivatePage} />
-        <Route path="/" component={PublicPage} />
-      </Switch>
-    </Router>
-  );
+const mapStateToProps = (state) => {
+  return state;
 };
 
-export default App;
+export default connect(mapStateToProps)(App);
+
+// const App = () => {
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route path="/private" component={PrivatePage} />
+//         <Route path="/" component={PublicPage} />
+//       </Switch>
+//     </Router>
+//   );
+// };
+
+// export default App;

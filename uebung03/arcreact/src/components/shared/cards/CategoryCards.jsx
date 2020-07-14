@@ -10,7 +10,7 @@ class CategoryCards extends Component {
     return (
       <div className="card-deck mx-auto">
         <Card
-          link="forum.html"
+          link="/gaming"
           img={{ src: VideoGames, alt: "Game Controller" }}
           title="Gaming Discussion"
           description="Feel free to discuss everything related to Games!"
@@ -18,7 +18,7 @@ class CategoryCards extends Component {
         />
 
         <Card
-          link="forum.html"
+          link="off-topic"
           img={{ src: OffTopic, alt: "Chat Bubbels" }}
           title="Off-Topic area"
           description="Hangout area for everything else. Just you, the World and anything between."
@@ -26,7 +26,7 @@ class CategoryCards extends Component {
         />
 
         <Card
-          link="forum.html"
+          link="announcements"
           img={{ src: Announcements, alt: "Megaphone" }}
           title="Announcements"
           description="Check here for announcements regarding Arcadia. Feedback is welcome!"

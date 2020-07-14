@@ -34,7 +34,7 @@ const SettingsButton = (
 );
 
 const SignOutButton = (
-  <a href="/" className="nav-link">
+  <a href="/" className="nav-link" onClick={() => localStorage.clear()}>
     Sign Out
   </a>
 );

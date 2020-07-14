@@ -7,17 +7,19 @@ function loginUser(user) {
     fetch(`https://localhost:443/api/users/login`, {
       method: "POST",
       headers: {
-        Authorization: "Basic " + base64,
-        "Access-Control-Allow-Origin": "*",
+        Authorization: "Basic " + base64
       },
     })
-
     .then((response) => {
         if (response.status === 200) {
             dispatch({
                 type: LOGIN_USER,
                 payload: user.username
             });
+            response.json().then((response) => {
+              localStorage.setItem('username', user.username);
+              localStorage.setItem('jwt-token', response);
+            })
         } else {
             throw Error('Auth failed');
         }

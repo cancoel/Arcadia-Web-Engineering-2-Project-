@@ -3,11 +3,9 @@ import "../../stylesheets/Login.css";
 import Avatar from "../../arcfrontend/layout/img/avatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import $ from "jquery";
-import { loginUser } from '../../actions/authActions';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
+import { loginUser } from "../../actions/authActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 class Login extends Component {
   constructor(props) {
@@ -18,19 +16,23 @@ class Login extends Component {
     };
     this.onLogin = this.onLogin.bind(this);
   }
-  
+
   onLogin(event) {
     const user = {
       username: this.state.username,
       password: this.state.password,
     };
     this.props.loginUser(user);
+    // $(document).on('hidden.bs.modal','#signin', function () {
+    //   window.location = $("#lol").attr("href");
+    // });
   }
+
 
   render() {
     return (
       <div id="signin" className="modal fade">
-          <div className="modal-dialog modal-login">
+        <div className="modal-dialog modal-login">
           <div className="modal-content">
             <div className="modal-header">
               <div className="avatar">
@@ -75,14 +77,16 @@ class Login extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <LinkContainer to="/private"
-       
+                  <a
+                    id="lol"
+                    type="submit"
+                    href="/private"
                     onClick={this.onLogin}
                     className="btn btn-primary btn-lg btn-block login-btn"
                     data-dismiss="modal"
                   >
-                   <Button>Login</Button> 
-                  </LinkContainer>
+                    Login
+                  </a>
                 </div>
               </form>
             </div>
@@ -97,7 +101,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginUser: PropTypes.func.isRequired
-}
+  loginUser: PropTypes.func.isRequired,
+};
 
 export default connect(null, { loginUser })(Login);

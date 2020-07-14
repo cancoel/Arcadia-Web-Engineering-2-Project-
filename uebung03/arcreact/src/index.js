@@ -8,12 +8,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import { Provider } from "react-redux";
 import store from "./components/shared/store";
-import Router from './components/shared/Routy';
 
 ReactDOM.render(
   <Provider store={store}>
     <App/>
-    {/* <Router/> */}
   </Provider>,
   document.getElementById("root")
 );
