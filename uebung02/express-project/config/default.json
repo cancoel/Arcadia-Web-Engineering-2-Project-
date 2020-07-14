@@ -1,6 +1,6 @@
 {
   "db": {
-    "connectionOptions": "{ useNewUrlParser: true, useUnifiedTopology: true }",
+    "connectionOptions": { "useNewUrlParser": true, "useUnifiedTopology": true },
     "connectionString": "mongodb://localhost:27017/test"
   },
 

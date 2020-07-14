@@ -1,6 +1,6 @@
 // get all users
 GET https://localhost:443/api/users
-Authorization: jwt-token 
+//Authorization: jwt-token 
 ###
 // register user "Can1"
 POST https://localhost:443/api/users/register 
@@ -8,9 +8,9 @@ POST https://localhost:443/api/users/register
 content-type: application/json
 
 {
-    "username":"cancoel2",
+    "username":"cancoel3",
     "password":"qwerty",
-    "email":"test@wefrwe2r.com",
+    "email":"test@wefrw2e2r.com",
     "userTypeAdmin":false
 }
 
@@ -28,14 +28,15 @@ content-type: application/json
 ###
 // login with username and password
 POST https://localhost:443/api/users/login
-content-type: application/json
-Authorization: Y2FuY29lbDI6cXdlcnR5
+Authorization: Basic Y2FuY29lbDI6cXdlcnR5
+
 
 
 ###
 // get user with by id
-GET https://localhost:443/api/users/5eea86856de47b3f9bb36b51
-Token: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbCIsImFkbWluIjp0cnVlfSwiaWF0IjoxNTkyNTg3NDg3LCJleHAiOjE1OTI1ODc1MTd9.i4jcDCAcVInZZylKexRSb1M_4WHUGZXtzwFQeXGrr74
+GET https://localhost:443/api/users/5f0c56a9d2718950af1a21c9
+Token: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbDIiLCJhZG1pbiI6ZmFsc2V9LCJpYXQiOjE1OTQ3Mzg1MTIsImV4cCI6MTU5NDczODgxMn0.65M6OHiTv7tc0dKZTJHjLll3asEUGJQ8e5ke68UnlSs
+
 
 
 ###

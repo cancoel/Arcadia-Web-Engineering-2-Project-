@@ -7,12 +7,14 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 var process = require("process");
+var db = require("./dbcon");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var messagesRouter = require("./routes/messages");
 var threadRouter = require("./routes/thread");
 var replyRouter = require("./routes/reply");
+
 
 var app = express();
 
@@ -45,6 +47,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+const cors = require('cors');
+app.use(cors());
 
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);

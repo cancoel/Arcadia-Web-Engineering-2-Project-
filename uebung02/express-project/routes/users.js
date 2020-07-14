@@ -94,7 +94,8 @@ router.post("/register", (request, response) => {
 });
 
 // Route to user login
-router.post("/login", renderBase64) 
+//router.post("/login", renderBase64) 
+router.post('/login', renderBase64, function(req, res, next) {console.log(req.headers)})
  
 // wird nicht mehr verwendet, ab jetzt im authHandler.js für das Login!
 

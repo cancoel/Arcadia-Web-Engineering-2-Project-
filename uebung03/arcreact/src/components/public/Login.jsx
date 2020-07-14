@@ -3,12 +3,34 @@ import "../../stylesheets/Login.css";
 import Avatar from "../../arcfrontend/layout/img/avatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import $ from "jquery";
+import { loginUser } from '../../actions/authActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+    };
+    this.onLogin = this.onLogin.bind(this);
+  }
+  
+  onLogin(event) {
+    const user = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+    this.props.loginUser(user);
+  }
+
   render() {
     return (
       <div id="signin" className="modal fade">
-        <div className="modal-dialog modal-login">
+          <div className="modal-dialog modal-login">
           <div className="modal-content">
             <div className="modal-header">
               <div className="avatar">
@@ -28,6 +50,10 @@ class Login extends Component {
               <form>
                 <div className="form-group">
                   <input
+                    value={this.state.username}
+                    onChange={(event) =>
+                      this.setState({ username: event.target.value })
+                    }
                     type="text"
                     className="form-control"
                     name="username"
@@ -37,6 +63,10 @@ class Login extends Component {
                 </div>
                 <div className="form-group">
                   <input
+                    value={this.state.password}
+                    onChange={(event) =>
+                      this.setState({ password: event.target.value })
+                    }
                     type="password"
                     className="form-control"
                     name="password"
@@ -45,17 +75,19 @@ class Login extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <a
-                    href="privateIndex.html"
+                  <LinkContainer to="/private"
+       
+                    onClick={this.onLogin}
                     className="btn btn-primary btn-lg btn-block login-btn"
+                    data-dismiss="modal"
                   >
-                    Login
-                  </a>
+                   <Button>Login</Button> 
+                  </LinkContainer>
                 </div>
               </form>
             </div>
             <div className="modal-footer">
-              <a href="#">Forgot Password?</a>
+              <a href="*">Forgot Password?</a>
             </div>
           </div>
         </div>
@@ -64,4 +96,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired
+}
+
+export default connect(null, { loginUser })(Login);

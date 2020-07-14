@@ -1,20 +1,47 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
-import TopMenu from "./components/TopMenu";
 import PublicPage from "./components/public/PublicPage";
-import Login from "./components/public/Login";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.bundle";
+import PrivatePage from "./components/private/PrivatePage";
+import { connect } from "react-redux";
+// import Router from "./components/shared/Routy";
+import { BrowserRouter as Router, Switch, Route, withRouter, NavLink } from "react-router-dom";
+import PrivateRoute from "./components/private/PrivateRoute";
 
-function App() {
+// class App extends Component {
+//   render() {
+//     return (
+//       <BrowserRouter>
+//         <Switch>
+//           <Route path="/private" component={PrivatePage} />
+//           <Route path="/" component={PublicPage} />
+//         </Switch>
+//       </BrowserRouter>
+//     );
+//   }
+
+// render() {
+//   const user = this.props.users.item;
+//   const content = user ? <PrivatePage /> : <PublicPage />;
+//   return <div className="App">{content}</div>;
+// }
+// }
+
+// const mapStateToProps = (state) => {
+//   return state
+// }
+
+// export default withRouter(connect(mapStateToProps)(App));
+// export default connect(mapStateToProps)(App);
+
+const App = () => {
   return (
-    <div className="App">
-      <TopMenu />
-      <PublicPage />
-      <Login />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/private" component={PrivatePage} />
+        <Route path="/" component={PublicPage} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
