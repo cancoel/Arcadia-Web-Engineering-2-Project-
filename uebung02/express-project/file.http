@@ -35,7 +35,7 @@ Authorization: Basic Y2FuY29lbDI6cXdlcnR5
 ###
 // get user with by id
 GET https://localhost:443/api/users/5f0c56a9d2718950af1a21c9
-Token: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbDIiLCJhZG1pbiI6ZmFsc2V9LCJpYXQiOjE1OTQ3Mzg1MTIsImV4cCI6MTU5NDczODgxMn0.65M6OHiTv7tc0dKZTJHjLll3asEUGJQ8e5ke68UnlSs
+Token: jwt-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiY2FuY29lbDIiLCJhZG1pbiI6ZmFsc2V9LCJpYXQiOjE1OTQ3Mzg2NjcsImV4cCI6MTU5NDczODk2N30.ST-PDrqhM9AIq83psjLD0Sp85fGyQDpBhfdQwj7I5jU
 
 
 

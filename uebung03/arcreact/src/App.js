@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+// import "./App.css";
 import Content from './components/shared/Content';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+import "./stylesheets/style.css"
 import { connect } from "react-redux";
 
 class App extends Component {

@@ -134,7 +134,7 @@ body {
 }
 
 .card-header {
-  display: flex ;
+  display: flex !important;
   align-items: center;
   border-bottom-width: 1px;
   padding-top: 0;
@@ -146,7 +146,7 @@ body {
 }
 
 .btn {
-  background-color: rgb(164, 21, 200);
+  background-color: rgb(164, 21, 163);
   width: 100%;
   height: 100%;
 }
@@ -186,8 +186,8 @@ body {
 }
 
 .card-body {
-  flex: 1 1 auto;
-  padding: 1.25rem;
+  flex: 1 1 auto !important;
+  padding: 1.25rem !important;
 }
 
 .flex-truncate {
@@ -206,6 +206,7 @@ a {
 .media img {
   width: 40px;
   height: auto;
+
 }
 
 .page-link {

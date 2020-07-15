@@ -1,21 +1,21 @@
 .mt-100 {
-    margin-top: 80px;
+    margin-top: 80px !important; 
   }
   
   .card {
-    border-width: 0;
-    transition: all 0.2s;
+    border-width: 0 !important;
+    transition: all 0.2s !important;
   }
   
   .card-header {
-    display: flex;
-    align-items: center;
-    border-bottom-width: 1px;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-right: 0.625rem;
-    height: 3.5rem;
-    background-color: rgb(15, 155, 142);
+    display: flex !important;
+    align-items: center !important;
+    border-bottom-width: 1px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0.625rem !important;
+    height: 3.5rem !important;
+    background-color: rgb(15, 155, 142) !important;
     border-bottom: 1px solid rgba(26, 54, 126, 0.125);
   }
   

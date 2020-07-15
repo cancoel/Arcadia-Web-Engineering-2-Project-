@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "../../stylesheets/Login.css";
+//import "../../stylesheets/Login.css";
 import Avatar from "../../arcfrontend/layout/img/avatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import $ from "jquery";
 import { loginUser } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -20,14 +19,13 @@ class Login extends Component {
   onLogin(event) {
     const user = {
       username: this.state.username,
-      password: this.state.password,
+      password: this.state.password
     };
     this.props.loginUser(user);
     // $(document).on('hidden.bs.modal','#signin', function () {
     //   window.location = $("#lol").attr("href");
     // });
   }
-
 
   render() {
     return (

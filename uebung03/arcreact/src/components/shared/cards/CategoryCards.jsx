@@ -3,7 +3,7 @@ import Card from "./Card";
 import VideoGames from "../../../arcfrontend/layout/img/video-games.png";
 import OffTopic from "../../../arcfrontend/layout/img/offtopic.png";
 import Announcements from "../../../arcfrontend/layout/img/announcements.png";
-import "../../../stylesheets/Card.css";
+//import "../../../stylesheets/Card.css";
 
 class CategoryCards extends Component {
   render() {
