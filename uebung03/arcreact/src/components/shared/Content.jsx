@@ -20,7 +20,7 @@ const headerItems = {
 
 function Content({ isLoggedIn }) {
   const username = localStorage.getItem("username"); // user from localStorage
-  const isPrivate = username !== null // is user in localstorage?
+  const isPrivate = username !== null; // is user in localstorage?
   const items =
     isLoggedIn || isPrivate ? headerItems.private : headerItems.public;
   return (

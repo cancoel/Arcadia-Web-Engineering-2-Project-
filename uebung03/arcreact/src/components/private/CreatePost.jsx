@@ -1,39 +1,33 @@
 import React, { Component } from "react";
-//import "../../stylesheets/Login.css";
-import Avatar from "../../arcfrontend/layout/img/avatar.png";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { loginUser } from "../../actions/authActions";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { newPost } from "../../actions/postAction";
 
-class Login extends Component {
+class CreatePost extends Component {
   constructor(props) {
     super(props);
+    this.newPost = this.newPost.bind(this);
     this.state = {
-      username: "",
-      password: "",
+      title: "",
+      content: "",
     };
-    this.onLogin = this.onLogin.bind(this);
   }
-
-  onLogin(event) {
-    const user = {
-      username: this.state.username,
-      password: this.state.password
+  newPost(event) {
+    const user = localStorage.getItem("user");
+    const post = {
+      title:  this.state.title, 
+      content: this.state.content
     };
-    this.props.loginUser(user);
+    this.props.newPost(user, post, this.props.posts.item);
+    event.preventDefault();
   }
-
   render() {
     return (
-      <div id="signin" className="modal fade">
+      <div id="newpost" className="modal fade">
         <div className="modal-dialog modal-login">
           <div className="modal-content">
             <div className="modal-header">
-              <div className="avatar">
-                <img src={Avatar} alt="Avatar" />
-              </div>
-              <h4 className="modal-title">Member Login</h4>
+              <h4 className="modal-title">Create new Post</h4>
               <button
                 type="button"
                 className="close"
@@ -47,27 +41,29 @@ class Login extends Component {
               <form>
                 <div className="form-group">
                   <input
-                    value={this.state.username}
+                    value={this.state.title}
                     onChange={(event) =>
-                      this.setState({ username: event.target.value })
+                      this.setState({ title: event.target.value })
                     }
                     type="text"
                     className="form-control"
-                    name="username"
-                    placeholder="Username"
+                    name="title"
+                    placeholder="Title"
                     required="required"
                   />
                 </div>
                 <div className="form-group">
-                  <input
-                    value={this.state.password}
+                  <textarea
+                    rows="10"
+                    resize="none"
+                    value={this.state.content}
                     onChange={(event) =>
-                      this.setState({ password: event.target.value })
+                      this.setState({ content: event.target.value })
                     }
-                    type="password"
+                    type="text"
                     className="form-control"
-                    name="password"
-                    placeholder="Password"
+                    name="content"
+                    placeholder="Content"
                     required="required"
                   />
                 </div>
@@ -76,17 +72,14 @@ class Login extends Component {
                     id="lol"
                     type="submit"
                     href="/private"
-                    onClick={this.onLogin}
+                    onClick={this.newPost}
                     className="btn btn-primary btn-lg btn-block login-btn"
                     data-dismiss="modal"
                   >
-                    Login
+                    Post
                   </a>
                 </div>
               </form>
-            </div>
-            <div className="modal-footer">
-              <a href="*">Forgot Password?</a>
             </div>
           </div>
         </div>
@@ -95,8 +88,12 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
+CreatePost.propTypes = {
+  newPost: PropTypes.func.isRequired,
 };
 
-export default connect(null, { loginUser })(Login);
+const mapStateToProps = ((state) => {
+  return state
+})
+
+export default connect(mapStateToProps, { newPost })(CreatePost);

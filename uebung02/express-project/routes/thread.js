@@ -10,7 +10,10 @@ router.post("/", (request, response) => {
   User.find({
     _id: request.body.author,
   })
-    .then((users) => {
+  .then((users) => {
+    console.log(request.body);
+      // if users.legth
+      console.log(users);
       let thread = new Thread({
         title: request.body.title,
         author: request.body.author,

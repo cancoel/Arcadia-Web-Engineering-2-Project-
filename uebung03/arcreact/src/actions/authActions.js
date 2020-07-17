@@ -12,13 +12,14 @@ function loginUser(user) {
     })
     .then((response) => {
         if (response.status === 200) {
-            dispatch({
-                type: LOGIN_USER,
-                payload: user.username
-            });
-            response.json().then((response) => {
-              localStorage.setItem('username', user.username);
-              localStorage.setItem('jwt-token', response);
+          response.json().then((response) => {
+              dispatch({
+                  type: LOGIN_USER,
+                  payload: response.user
+              });
+              console.log(response.user);
+              localStorage.setItem('user', response.user);
+              localStorage.setItem('jwt-token', response.token);
             })
         } else {
             throw Error('Auth failed');

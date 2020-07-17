@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-// import "./App.css";
-import Content from './components/shared/Content';
+import Content from "./components/shared/Content";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import "./stylesheets/style.css"
+import "./stylesheets/style.css";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -13,7 +12,7 @@ class App extends Component {
     const isLoggedIn = user !== null; // is someone logged in?
     return (
       <div className="App">
-        <Content isLoggedIn={isLoggedIn}/>
+        <Content isLoggedIn={isLoggedIn} />
       </div>
     );
   }
@@ -25,15 +24,3 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(App);
 
-// const App = () => {
-//   return (
-//     <Router>
-//       <Switch>
-//         <Route path="/private" component={PrivatePage} />
-//         <Route path="/" component={PublicPage} />
-//       </Switch>
-//     </Router>
-//   );
-// };
-
-// export default App;

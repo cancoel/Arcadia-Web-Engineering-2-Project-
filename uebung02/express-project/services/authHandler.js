@@ -86,7 +86,7 @@ authHandler.renderBase64 = (req, res, next) => {
       if (isMatch) {
         userService.createToken({username:user.username, admin:user.userTypeAdmin}, (token) => {
           res.setHeader("Token", "jwt-token " + token);
-          res.json(token)
+          res.json({token, user: user._id})
         });
         res.status(200).json("Logged in");
       } else {
