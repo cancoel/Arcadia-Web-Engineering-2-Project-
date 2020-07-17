@@ -16,7 +16,6 @@ function getPosts() {
           response
             .json()
             .then((json) => {
-              console.log(json);
               const isEmpty = !json.length;
               if (isEmpty) {
                 dispatch({
@@ -64,7 +63,6 @@ function newPost(user, post, allPosts) {
           response
             .json()
             .then((json) => {
-              console.log(json);
               dispatch({
                 type: NEW_POST,
                 payload: [...allPosts, json],

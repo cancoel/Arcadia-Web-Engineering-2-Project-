@@ -8,8 +8,9 @@ const ThreadSchema = mongoose.Schema({
     type: String,
   },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: "User",
+    type: String
   },
   Date: {
     type: Date,

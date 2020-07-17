@@ -17,7 +17,6 @@ function loginUser(user) {
                   type: LOGIN_USER,
                   payload: response.user
               });
-              console.log(response.user);
               localStorage.setItem('user', response.user);
               localStorage.setItem('jwt-token', response.token);
             })

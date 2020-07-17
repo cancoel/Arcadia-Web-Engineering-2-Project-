@@ -13,10 +13,10 @@ router.post("/", (request, response) => {
   .then((users) => {
     console.log(request.body);
       // if users.legth
-      console.log(users);
+      console.log(users[0]);
       let thread = new Thread({
         title: request.body.title,
-        author: request.body.author,
+        author: users[0].username,
         content: request.body.content,
       });
 
