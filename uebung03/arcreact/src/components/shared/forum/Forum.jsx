@@ -11,20 +11,16 @@ import Topic from "./Topic";
 import CreatePost from "../../private/CreatePost";
 
 class Forum extends Component {
-
   componentWillMount() {
     this.props.getPosts();
   }
-
 
   render() {
     const posts = this.props.posts.item; // posts from redux store
     const hasFetchedPosts = posts !== null; // gibt es schon posts im store?
     let topics;
     if (hasFetchedPosts) {
-      topics = posts.map((topic, index) => (
-        <Topic key={index} topic={topic}/>
-      ));
+      topics = posts.map((topic, index) => <Topic key={index} topic={topic} />);
     }
 
     return (
@@ -58,11 +54,15 @@ class Forum extends Component {
           <div className="card mb-3 mt-3 mx-0">
             <div className="card-header pl-0 pr-0">
               <div className="row no-gutters w-100 align-items-center">
-                <div className="col ml-3">Topics</div>
+                <div className="col ml-3 font-weight-bold">Topics</div>
               </div>
             </div>
             {
-              topics ?? <p>No posts</p> // topics ? topics : loading
+              topics ?? (
+                <p className="font-weight-light marginleft">
+                  No posts yet.
+                </p>
+              ) // topics ? topics : loading
             }
           </div>
         </div>

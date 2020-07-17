@@ -4,6 +4,7 @@ import {
   NO_POSTS,
   NEW_POST,
   NEW_POST_FAILED,
+  DELETE_POST,
 } from "./types";
 
 function getPosts() {
@@ -53,8 +54,8 @@ function newPost(user, post, allPosts) {
     fetch(`https://localhost:443/api/threads`, {
       method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     })
@@ -82,4 +83,19 @@ function newPost(user, post, allPosts) {
   };
 }
 
-export { getPosts, newPost };
+function deletePost(post, allPosts) {
+  return function (dispatch) {
+    fetch(`https://localhost:443/api/threads/remove/${post._id}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: DELETE_POST,
+          payload: allPosts.filter((item) => item._id !== post._id),
+        });
+      }
+    });
+  };
+}
+
+export { getPosts, newPost, deletePost };

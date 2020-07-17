@@ -5,6 +5,7 @@ const GET_POSTS_FAILED = "GET_POSTS_FAILED";
 const NO_POSTS = "NO_POSTS";
 const NEW_POST = "NEW_POST";
 const NEW_POST_FAILED = "NEW_POST_FAILED";
+const DELETE_POST = "DELETE_POST";
 
 export {
   LOGIN_USER,
@@ -14,4 +15,5 @@ export {
   NO_POSTS,
   NEW_POST,
   NEW_POST_FAILED,
+  DELETE_POST
 };

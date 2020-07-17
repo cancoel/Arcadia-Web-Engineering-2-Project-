@@ -15,8 +15,8 @@ class CreatePost extends Component {
   newPost(event) {
     const user = localStorage.getItem("user");
     const post = {
-      title:  this.state.title, 
-      content: this.state.content
+      title: this.state.title,
+      content: this.state.content,
     };
     this.props.newPost(user, post, this.props.posts.item);
     event.preventDefault();
@@ -41,6 +41,7 @@ class CreatePost extends Component {
               <form>
                 <div className="form-group">
                   <input
+                    maxLength="30"
                     value={this.state.title}
                     onChange={(event) =>
                       this.setState({ title: event.target.value })
@@ -92,8 +93,8 @@ CreatePost.propTypes = {
   newPost: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ((state) => {
-  return state
-})
+const mapStateToProps = (state) => {
+  return state;
+};
 
 export default connect(mapStateToProps, { newPost })(CreatePost);

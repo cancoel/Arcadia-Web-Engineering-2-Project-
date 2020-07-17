@@ -234,3 +234,21 @@ textarea{
   resize: none;
 }
 
+.nomargin {
+  margin: 0 !important;
+  font-size: 0.9em;
+}
+
+.delbutton {
+  position: absolute;
+  width: 5em;
+  height: 2em;
+  background-color: red;
+  right: 0.5em;
+  z-index: 100;
+}
+
+.marginleft {
+  margin-top: 1em;
+  margin-left: 1em !important;
+}
